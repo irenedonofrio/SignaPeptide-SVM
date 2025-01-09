@@ -33,7 +33,7 @@ A dataset of eukaryotic proteins was obtained from UniProtKB/SwissProt (release 
 All proteins in both sets are longer than 30 amino acids.
 
 ## 3. METHODS
-### 3.1 von Heijne method
+### 3.1 von Heijne method 
 A Position-Specific Scoring Matrix (PSWM) of length *L*=15 was constructed from a set of *N* aligned signal peptide sequences. The matrix was populated as follows:
 
 M<sub>k,j</sub> = (1 / (N + 20)) * (1 + Σ I(s<sub>i,j</sub> = k))
@@ -66,3 +66,14 @@ Where:
 
 The maximum score across all windows for a given sequence was used for classification. A threshold was then applied: sequences with a score greater than or equal to the threshold were classified as SP proteins, while those with lower scores were classified as non-SP proteins.
 
+To define an optimal threshold, a 5-fold cross-validation procedure was implemented, ensuring that all the subsets had the opportunity to explore each role. At the end of the cross-validation, the optimal threshold to use in the benchmarking phase was obtained by averaging the 5 thresholds obtained from the individual runs. Upon completing the threshold optimization procedure, the PSWM was computed on the entire training dataset and the performance benchmarked on the blind set.
+
+### 3.2 Support Vector Machine
+Each sequence is encoded as a vector, whose dimension depends on the number of features selected. As a baseline vector, a 20-dimensional vector containing the frequency of each residue at the N-terminus (‘Ncomp’) is adopted. This baseline vector can be extended with the following additional features:
+* Global composition (‘gcomp’): frequency of each residue starting from the Kth position until the end.
+* Hydrophobicity (‘hp’): this feature has been extracted using a sliding window of 7 until K and the hydropathicity scale of Kyte and Doolittle (Kyte and Doolittle, 1982).
+* Global hydrophobicity (‘ghp’): the profile is computed adopting a sliding window of 7 and the same propensity scale adopted for ‘hp’ (Kyte and Doolittle, 1982).
+* Charge (‘ch’) = the scale is structured such that positively charged residues have value 1 and the other residues have a value equal to 0. The sliding window adopted for the extraction
+  was of length equal to 5.
+* Helix tendency (‘ht’): the profile is computed adopting a sliding window of 7 that slides until K, the scale adopted is the one developed by Chou and Fasman (Chou and Fasman, 1978).
+* Transmembrane tendency (‘tmt’): it is encoded using the Zhao and London scale (Zhao and London, 2006) and a sliding window of length 7
