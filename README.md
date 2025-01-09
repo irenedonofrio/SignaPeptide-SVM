@@ -77,3 +77,5 @@ Each sequence is encoded as a vector, whose dimension depends on the number of f
   was of length equal to 5.
 * Helix tendency (‘ht’): the profile is computed adopting a sliding window of 7 that slides until K, the scale adopted is the one developed by Chou and Fasman (Chou and Fasman, 1978).
 * Transmembrane tendency (‘tmt’): it is encoded using the Zhao and London scale (Zhao and London, 2006) and a sliding window of length 7
+
+For all these features but global composition, the average value, the maximum value, and the position of the maximum value are extracted (see figure below) and normalized within the range [0,1].
