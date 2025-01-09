@@ -1,4 +1,4 @@
-# SignaPeptide-SVM
+# SignalPeptide-SVM
 
 This repository contains all the materials for the final project of the course Laboratory of Bioinformatics 2 of the MSc Bioinformatics - University of Bologna (AY 2023-2024). 
 The projects consists in implementing two different methods for the **identification of signal peptides in eukaryotes**: 
