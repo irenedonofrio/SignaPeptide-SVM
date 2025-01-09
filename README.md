@@ -29,8 +29,11 @@ This project implements an **SVC** for SP prediction in eukaryotes. The model **
 A dataset of eukaryotic proteins was obtained from UniProtKB/SwissProt (release 2023_04). The dataset includes:
 
 * **Positive set (SP proteins)**: 2942 proteins with experimentally verified signal peptide cleavage sites (excluding those with unclear or early cleavage sites).
-* **Negative set (non-SP proteins)**: 30011 proteins with experimental evidence of localization in cellular compartments not associated with the secretory pathway (cytosol, nucleus, mitochondrion, plastid, peroxisome, cell membrane). Proteins containing terms related to the secretory pathway (e.g., "endoplasmic," "Golgi," "secreted," "lysosome") were excluded from the negative set.
+* **Negative set (non-SP proteins)**: 30011 proteins with experimental evidence of localization in cellular compartments not associated with the secretory pathway. Proteins containing terms related to the secretory pathway were excluded from the negative set.
 All proteins in both sets are longer than 30 amino acids.
 
 ## 3. METHODS
 ### 3.1 von Heijne method
+A Position-Specific Scoring Matrix (PSWM) of length *L*=15 was constructed from a set of *N* aligned signal peptide sequences. The matrix was populated as follows:
+M<sub>k,j</sub> = (1 / (N + 20)) * (1 + Σ I(s<sub>i,j</sub> = k))
+
