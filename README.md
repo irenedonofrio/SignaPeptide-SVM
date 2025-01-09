@@ -35,5 +35,34 @@ All proteins in both sets are longer than 30 amino acids.
 ## 3. METHODS
 ### 3.1 von Heijne method
 A Position-Specific Scoring Matrix (PSWM) of length *L*=15 was constructed from a set of *N* aligned signal peptide sequences. The matrix was populated as follows:
+
 M<sub>k,j</sub> = (1 / (N + 20)) * (1 + Σ I(s<sub>i,j</sub> = k))
+
+Where:
+
+*   *M<sub>k,j</sub>* is the score for amino acid *k* at position *j*.
+*   *s<sub>i,j</sub>* is the amino acid at position *j* in sequence *i*.
+*   *k* represents each of the 20 standard amino acids.
+*   *I(s<sub>i,j</sub> = k)* is an indicator function (1 if *s<sub>i,j</sub>* equals *k*, 0 otherwise).
+*   `+1` represents the added pseudocount to avoid zero values.
+*   *N* + 20 is the normalization factor, accounting for the *N* sequences and the 20 pseudocounts (one for each amino acid).
+
+The PSWM was then corrected for background amino acid frequencies (*b<sub>k</sub>*) from UniProtKB-SwissProt, and log-transformed:
+
+W<sub>k,j</sub> = log(M<sub>k,j</sub> / b<sub>k</sub>)
+
+Where:
+
+*   *W<sub>k,j</sub>* is the final score for amino acid *k* at position *j* in the PSWM.
+*   *b<sub>k</sub>* is the background frequency of amino acid *k*.
+
+To score a new sequence, a sliding window of length 15 was used, scanning up to the 75th residue (90-15). The score for each window *X*(X<sub>1</sub>, ..., X<sub>15</sub>) was calculated as:
+
+score(X) = Σ W<sub>X<sub>j</sub>,j</sub>
+
+Where:
+
+*   *X<sub>j</sub>* is the amino acid at position *j* in the window *X*.
+
+The maximum score across all windows for a given sequence was used for classification. A threshold was then applied: sequences with a score greater than or equal to the threshold were classified as SP proteins, while those with lower scores were classified as non-SP proteins.
 
