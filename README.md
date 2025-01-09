@@ -3,7 +3,9 @@
 This repository contains all the materials for the final project of the course Laboratory of Bioinformatics 2 of the MSc Bioinformatics - University of Bologna (AY 2023-2024). 
 The projects consists in implementing two different methods for the **identification of signal peptides in eukaryotes**: 
 * A position-specific weight matrix (**PSWM**) method, that traces one of the earliest approaches (von Heijne, 1986)
-* A Support Vector Machine classifier (**SVC**)
+* A Support Vector Machine classifier (**SVC**) that incorporates features encoding characteristics of both the SP sequence and the broader protein context
+
+All the details can be found in DOnofrio-lb2-prj.pdf. Below the most essential concepts are outlined.
 
 ## 1. INTRODUCTION
 ### Signal Peptides
@@ -22,3 +24,13 @@ Signal peptide prediction is one of the earliest challenges in the bioinformatic
 
 ### Objective of this project
 This project implements an **SVC** for SP prediction in eukaryotes. The model **incorporates features encoding characteristics of both the SP sequence and the broader protein context**, aiming for a more comprehensive prediction. The SVC's performance is compared to that of a PSWM method based on von Heijne's (1986) approach. Benchmarking on the same blind test set demonstrated the superior performance of the SVC, achieving an **MCC of 0.89**, with higher sensitivity and precision compared to the PSWM.
+
+## 2. DATASET 
+A dataset of eukaryotic proteins was obtained from UniProtKB/SwissProt (release 2023_04). The dataset includes:
+
+* **Positive set (SP proteins)**: 2942 proteins with experimentally verified signal peptide cleavage sites (excluding those with unclear or early cleavage sites).
+* **Negative set (non-SP proteins)**: 30011 proteins with experimental evidence of localization in cellular compartments not associated with the secretory pathway (cytosol, nucleus, mitochondrion, plastid, peroxisome, cell membrane). Proteins containing terms related to the secretory pathway (e.g., "endoplasmic," "Golgi," "secreted," "lysosome") were excluded from the negative set.
+All proteins in both sets are longer than 30 amino acids.
+
+## 3. METHODS
+### 3.1 von Heijne method
