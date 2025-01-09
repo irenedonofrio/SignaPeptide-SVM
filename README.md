@@ -79,3 +79,6 @@ Each sequence is encoded as a vector, whose dimension depends on the number of f
 * Transmembrane tendency (‘tmt’): it is encoded using the Zhao and London scale (Zhao and London, 2006) and a sliding window of length 7
 
 For all these features but global composition, the average value, the maximum value, and the position of the maximum value are extracted (see figure below) and normalized within the range [0,1].
+
+
+![Alt text for the image](images/sliding_window2.png)
