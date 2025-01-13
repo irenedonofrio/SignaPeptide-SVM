@@ -14,7 +14,7 @@ All the details can be found in D'Onofrio-lb2-prj.pdf. Below the most essential 
 Signal peptides (SPs) are short amino acid sequences that act as molecular "zip codes," directing proteins to the secretory pathway. A typical SP consists of 15–30 residues and exhibits a tripartite structure:
 
 *   **N-region:** A positively charged domain (1–5 residues).
-*   **H-region:** A hydrophobic core (7–15 residues).
+*   **H-region:** A hydrophobic core (7–15 residues). It is the cardinal element of the SP. 
 *   **C-region:** The region flanking the cleavage site (3–7 residues).
 
 
@@ -24,7 +24,7 @@ Signal peptide prediction is one of the earliest challenges in the bioinformatic
 
 ### Objective of this project
 This project implements an **SVC** for SP prediction in eukaryotes. The model **incorporates features encoding characteristics of both the SP sequence and the broader protein context**, aiming for a more comprehensive prediction. The SVC's performance is compared to that of a PSWM method based on von Heijne's (1986) approach. 
-ADD about cross validation
+A 5-fold cross-validation procedure was implemented to optimize the hyperparameters: the threshold in the case of the von Heijne's method and C,gamma and K in the case of the SVC.
 Benchmarking on the same blind test set demonstrated the superior performance of the SVC, achieving an **MCC of 0.89**, with higher sensitivity and precision compared to the PSWM.
 
 ## 2. DATASET 
