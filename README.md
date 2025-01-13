@@ -5,6 +5,8 @@ The projects consists in implementing two different methods for the **identifica
 * A position-specific weight matrix (**PSWM**) method, that traces one of the earliest approaches (von Heijne, 1986)
 * A Support Vector Machine classifier (**SVC**) that incorporates features encoding characteristics of both the SP sequence and the broader protein context
 
+In both cases, hyperparameters are optimized trough a **5-fold cross-validation** procedure and the final models are benchmarked on a **hold out test set**. 
+
 All the details can be found in D'Onofrio-lb2-prj.pdf. Below the most essential concepts are outlined.
 
 ## 1. INTRODUCTION
