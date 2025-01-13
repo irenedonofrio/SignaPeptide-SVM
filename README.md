@@ -3,7 +3,7 @@
 This repository contains all the materials for the final project of the course Laboratory of Bioinformatics 2 of the MSc Bioinformatics - University of Bologna (AY 2023-2024). 
 The projects consists in implementing two different methods for the **identification of signal peptides in eukaryotes**: 
 * A position-specific weight matrix (**PSWM**) method, that traces one of the earliest approaches (von Heijne, 1986)
-* A Support Vector Machine classifier (**SVC**) that incorporates features encoding characteristics of both the SP sequence and the broader protein context
+* A Support Vector Machine classifier (**SVC**) that incorporates features encoding characteristics of both the SP sequence (*local features*) and the broader protein context (*global features*)
 
 In both cases, hyperparameters are optimized trough a **5-fold cross-validation** procedure and the final models are benchmarked on a **hold out test set**. 
 
@@ -103,7 +103,7 @@ The training set is subdivided in 5 and each run has the following steps:
 * Testing (1 subset)
 
 ## 4. Results
-The top performing SVC model and the von Heijne's method were benchmarked. Both models showed generalization ability, however the SVC ouperformed:
+The top performing *SVM-tmt-gcomp-hp* model and the von Heijne's method were benchmarked. Both models showed generalization ability, however the SVC ouperformed:
 | Model | MCC | Precision | Recall |
 | :---:         |     :---:      |    :---:      |    :---:   |
 |von Heijne  | 0.70    | 0.66    |     0.82      |
