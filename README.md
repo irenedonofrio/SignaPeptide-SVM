@@ -32,8 +32,10 @@ A dataset of eukaryotic proteins was obtained from UniProtKB/SwissProt (release 
 
 * **Positive set (SP proteins)**: 2942 proteins with experimentally verified signal peptide cleavage sites (excluding those with unclear or early cleavage sites).
 * **Negative set (non-SP proteins)**: 30011 proteins with experimental evidence of localization in cellular compartments not associated with the secretory pathway.
-* 
+  
 All proteins in both sets are longer than 30 amino acids.
+
+The dataset was split in 80/20. 
 
 ## 3. METHODS
 ### 3.1 von Heijne method 
@@ -73,6 +75,7 @@ To define an optimal threshold, a 5-fold cross-validation procedure was implemen
 
 ### 3.2 Support Vector Machine
 Each sequence is encoded as a vector, whose dimension depends on the number of features selected. As a baseline vector, a 20-dimensional vector containing the frequency of each residue at the N-terminus (‘Ncomp’) is adopted. This baseline vector can be extended with the following additional features:
+
 * Global composition (‘gcomp’): frequency of each residue starting from the Kth position until the end.
 * Hydrophobicity (‘hp’): this feature has been extracted using a sliding window of 7 until K and the hydropathicity scale of Kyte and Doolittle (Kyte and Doolittle, 1982).
 * Global hydrophobicity (‘ghp’): the profile is computed adopting a sliding window of 7 and the same propensity scale adopted for ‘hp’ (Kyte and Doolittle, 1982).
@@ -82,6 +85,26 @@ Each sequence is encoded as a vector, whose dimension depends on the number of f
 * Transmembrane tendency (‘tmt’): it is encoded using the Zhao and London scale (Zhao and London, 2006) and a sliding window of length 7
 
 For all these features but global composition, the average value, the maximum value, and the position of the maximum value are extracted (see figure below) and normalized within the range [0,1].
-
+Different combinations of these features were implemented and tested, and only the top performing SVC model (*SVM-tmt-gcomp-hp*) in the CV was chosen to be benchmarked.
 
 ![Alt text for the image](images/sliding_window2.png)
+
+Three parameters are optimized:
+* C
+* gamma
+* K
+
+ 
+
+### 3.3 5-fold cross-validation procedure
+The training set is subdivided in 5 and each run has the following steps:
+* Training (3 subsets)
+* Validation (1 subset)
+* Testing (1 subset)
+
+## 4. Results
+The top performing SVC model and the von Heijne's method were benchmarked. Both models showed generalization ability, however the SVC ouperformed:
+| Model | MCC | Precision | Recall |
+| :---:         |     :---:      |    :---:      |    :---:   |
+|von Heijne  | 0.70    | 0.66    |     0.82      |
+| SVC     | 0.89       | 0.93      |    0.87       |
