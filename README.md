@@ -108,3 +108,7 @@ The top performing *SVM-tmt-gcomp-hp* model and the von Heijne's method were ben
 | :---:         |     :---:      |    :---:      |    :---:   |
 |von Heijne  | 0.70    | 0.66    |     0.82      |
 | SVC     | 0.89       | 0.93      |    0.87       |
+
+
+
+***Limitations***: Despite the outperformance the presence of transmembrane proteins (also characterized by the hydrophobic N-terminus) mislabeled by the SVC as SP indicates that this method comes with limitations and that more powerful and complex approaches are needed.
